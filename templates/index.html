@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevOps Assignment App</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            color: #e2e8f0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .card {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 16px;
+            padding: 40px;
+            max-width: 560px;
+            width: 100%;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        h1 { font-size: 1.8rem; margin-bottom: 8px; color: #38bdf8; }
+        p.subtitle { color: #94a3b8; margin-bottom: 28px; }
+        .status {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #052e16;
+            color: #4ade80;
+            padding: 6px 14px;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            margin-bottom: 28px;
+        }
+        .dot { width: 8px; height: 8px; border-radius: 50%; background: #4ade80; }
+        .links { display: flex; flex-direction: column; gap: 10px; }
+        a.btn {
+            display: block;
+            background: #0f172a;
+            border: 1px solid #334155;
+            color: #e2e8f0;
+            padding: 12px 16px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: border-color 0.15s;
+        }
+        a.btn:hover { border-color: #38bdf8; }
+        code { color: #fbbf24; }
+        #info { margin-top: 20px; font-size: 0.85rem; color: #94a3b8; white-space: pre-wrap; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="status"><span class="dot"></span> Application Running</div>
+        <h1>DevOps Assignment App</h1>
+        <p class="subtitle">Python (Flask) demo app for AWS deployment</p>
+        <div class="links">
+            <a class="btn" href="/health">GET <code>/health</code> — health check</a>
+            <a class="btn" href="/api/info">GET <code>/api/info</code> — app info</a>
+            <a class="btn" href="/api/compute">GET <code>/api/compute</code> — CPU load endpoint</a>
+        </div>
+        <div id="info"></div>
+    </div>
+    <script>
+        fetch('/api/info').then(r => r.json()).then(data => {
+            document.getElementById('info').textContent = JSON.stringify(data, null, 2);
+        });
+    </script>
+</body>
+</html>
